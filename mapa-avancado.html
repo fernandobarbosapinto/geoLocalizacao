@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<title>HTML5 Geolocation</title>
+	<style type="text/css">
+		#mapa{
+			width: 700px;
+			height: 500px;
+			border: 1px solid #000;
+		}
+	</style>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v3"></script>
+</head>
+<body>
+	<h1>Mapa Dinâmico</h1>
+	<div id="mapa">
+		<!-- Aqui vamos colocar nosso mapa -->
+	</div>
+	<script type="text/javascript">
+		var divMapa = document.getElementById('mapa');
+
+		navigator.geolocation.getCurrentPosition(fn_ok, fn_error);
+
+		function fn_error(){}
+
+		function fn_ok(resposta){
+			var lat = resposta.coords.latitude;
+			var lon = resposta.coords.longitude;
+			//Guardando a longitude e latitude
+			var gLatLon = new google.maps.LatLng(lat, lon);
+			//Exibindo o mapa
+			var objConfig = {
+				zoom: 17,
+				center: gLatLon
+			}
+			var gMapa = new google.maps.Map(divMapa, objConfig);
+			//Inserindo Marcador no mapa
+			var objConfigMarker = {
+				position:gLatLon,
+				map:gMapa,
+				title: 'Você está Aqui!'
+			}
+			var gMarker = new google.maps.Marker(objConfigMarker);
+
+			var gCoder = new google.maps.Geocoder();
+
+		}		
+	</script>
+</body>
+</html>
