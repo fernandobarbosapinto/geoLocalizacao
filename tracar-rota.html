@@ -79,13 +79,15 @@
 
 			//Tracando Rota
 			var objConfigDR = {
-				map:gMapa
+				map:gMapa,
+				suppressMarkers: true
 			}
 
+			//TRAVELMODE BICYCLING, DRIVING, TRANSIT, WALKING
 			var objConfigDS = {
 				origin:gLatLon,
 				destination:objInformacion.address,
-				travelMode: google.maps.travelMode.DRIVING
+				travelMode: google.maps.TravelMode.DRIVING
 			}
 
 			var ds = new google.maps.DirectionsService(); //Obtendo coordenadas
