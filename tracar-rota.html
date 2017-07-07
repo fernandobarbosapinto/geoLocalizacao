@@ -77,6 +77,32 @@
 				});
 			}
 
+			//Tracando Rota
+			var objConfigDR = {
+				map:gMapa
+			}
+
+			var objConfigDS = {
+				origin:gLatLon,
+				destination:objInformacion.address,
+				travelMode: google.maps.travelMode.DRIVING
+			}
+
+			var ds = new google.maps.DirectionsService(); //Obtendo coordenadas
+			
+			var dr = new google.maps.DirectionsRenderer(objConfigDR); //Traduz as coordenadas a rota visivel
+
+			ds.route(objConfigDS, fnTracarRota);
+
+			function fnTracarRota(rotaResultado, status){
+				//mostrar a rota entre o ponto A e B
+				if(status == 'OK'){
+					dr.setDirections(rotaResultado);
+				}else{
+					alert('Error '+status);
+				}
+			}
+
 		}		
 	</script>
 </body>
