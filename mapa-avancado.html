@@ -59,7 +59,18 @@
 					title: 'Starbucks, hora de tomar um cafézinho'
 				}
 				var gMarkerDest = new google.maps.Marker(config);
-					gMarkerDest.setIcon('http://artitudesdesign.com/wp-content/uploads/2017/02/starbucks_featured_image-80x80.jpg');
+					//Setando uma imagem para o marcador
+					//gMarkerDest.setIcon('http://artitudesdesign.com/wp-content/uploads/2017/02/starbucks_featured_image-80x80.jpg');
+
+				//Criando uma Janela de Informação	
+				var objHTML = {
+					content: '<div><h2>Parada do Café</h2><h3>Promoção</h3><p><strong>R$3,50</strong></p></div>'
+				}
+				var gInfoWindow = new google.maps.InfoWindow(objHTML);
+
+				google.maps.event.addListener(gMarkerDest, 'click', function(){
+					gInfoWindow.open(gMapa, gMarkerDest);
+				});
 			}
 
 		}		
