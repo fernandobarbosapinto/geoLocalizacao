@@ -36,9 +36,12 @@
 			}
 			var gMapa = new google.maps.Map(divMapa, objConfig);
 			//Inserindo Marcador no mapa
+			//opcao draggable é utilizada para permitir que o usuário arraste o marcador
 			var objConfigMarker = {
 				position:gLatLon,
+				animation: google.maps.Animation.Drop,
 				map:gMapa,
+				draggable: true,
 				title: 'Você está Aqui!'
 			}
 			var gMarker = new google.maps.Marker(objConfigMarker);
@@ -55,6 +58,7 @@
 				var coordenadas = dados[0].geometry.location; //obj LatLong
 				var config ={
 					map: gMapa,
+					animation: google.maps.Animation.Drop,
 					position: coordenadas,
 					title: 'Starbucks, hora de tomar um cafézinho'
 				}
