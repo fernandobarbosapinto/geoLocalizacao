@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>HTML5 Geolocation</title>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v3"></script>
 </head>
 <body>
 	<h1>Mapa Dinâmico</h1>
@@ -10,7 +11,15 @@
 		<!-- Aqui vamos colocar nosso mapa -->
 	</div>
 	<script type="text/javascript">
-		
+		var divMapa = document.getElementById('mapa');
+
+		navigator.geolocation.getCurrentPosition(fn_ok, fn_error);
+
+		function fn_error(){}
+
+		function fn_ok(resposta){
+
+		}		
 	</script>
 </body>
 </html>
