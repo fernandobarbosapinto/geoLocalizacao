@@ -19,8 +19,13 @@
 
 		//Entrar nessa função quando for permitido pegar a localização do usuário
 		function fn_ok(resposta){
-			mostrar_objeto(resposta);
-			divMapa.innerHTML = 'Temos autorização para ver sua localização';
+			//mostrar_objeto(resposta.coords);
+			var lat = resposta.coords.latitude;
+			var lon = resposta.coords.longitude;
+
+			divMapa.innerHTML = lat+','+lon;
+
+			//divMapa.innerHTML = 'Temos autorização para ver sua localização';
 		}
 
 		//mostrar_objeto(navigator.geolocation);
