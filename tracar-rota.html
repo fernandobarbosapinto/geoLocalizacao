@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<title>HTML5 Geolocation</title>
+	<style type="text/css">
+		#mapa{
+			width: 700px;
+			height: 500px;
+			border: 1px solid #000;
+		}
+	</style>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v3"></script>
+</head>
+<body>
+	<h1>Mapa Dinâmico</h1>
+	<div id="mapa">
+		<!-- Aqui vamos colocar nosso mapa -->
+	</div>
+	<script type="text/javascript">
+		var divMapa = document.getElementById('mapa');
+
+		navigator.geolocation.getCurrentPosition(fn_ok, fn_error);
+
+		function fn_error(){}
+
+		function fn_ok(resposta){
+			var lat = resposta.coords.latitude;
+			var lon = resposta.coords.longitude;
+			//Guardando a longitude e latitude
+			var gLatLon = new google.maps.LatLng(lat, lon);
+			//Exibindo o mapa
+			var objConfig = {
+				zoom: 17,
+				center: gLatLon
+			}
+			var gMapa = new google.maps.Map(divMapa, objConfig);
+			//Inserindo Marcador no mapa
+			//opcao draggable é utilizada para permitir que o usuário arraste o marcador
+			var objConfigMarker = {
+				position:gLatLon,
+				animation: google.maps.Animation.Drop,
+				map:gMapa,
+				draggable: true,
+				title: 'Você está Aqui!'
+			}
+			var gMarker = new google.maps.Marker(objConfigMarker);
+
+			//Inserindo o segundo marcado no mapa
+			var gCoder = new google.maps.Geocoder();
+			var objInformacion = {
+				address:'Av. Engenheiro Luís Carlos Berrini 773, Itaim Bibi, São Paulo'
+			}
+
+			gCoder.geocode(objInformacion, fn_coder);
+
+			function fn_coder(dados){
+				var coordenadas = dados[0].geometry.location; //obj LatLong
+				var config ={
+					map: gMapa,
+					animation: google.maps.Animation.Drop,
+					position: coordenadas,
+					title: 'Starbucks, hora de tomar um cafézinho'
+				}
+				var gMarkerDest = new google.maps.Marker(config);
+					//Setando uma imagem para o marcador
+					//gMarkerDest.setIcon('http://artitudesdesign.com/wp-content/uploads/2017/02/starbucks_featured_image-80x80.jpg');
+
+				//Criando uma Janela de Informação	
+				var objHTML = {
+					content: '<div><h2>Parada do Café</h2><h3>Promoção</h3><p><strong>R$3,50</strong></p></div>'
+				}
+				var gInfoWindow = new google.maps.InfoWindow(objHTML);
+
+				google.maps.event.addListener(gMarkerDest, 'click', function(){
+					gInfoWindow.open(gMapa, gMarkerDest);
+				});
+			}
+
+		}		
+	</script>
+</body>
+</html>
