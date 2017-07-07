@@ -44,6 +44,21 @@
 			var gMarker = new google.maps.Marker(objConfigMarker);
 
 			var gCoder = new google.maps.Geocoder();
+			var objInformacion = {
+				address:'Av. Engenheiro Luís Carlos Berrini 773, Itaim Bibi, São Paulo'
+			}
+
+			gCoder.geocode(objInformacion, fn_coder);
+
+			function fn_coder(dados){
+				var coordenadas = dados[0].geometry.location; //obj LatLong
+				var config ={
+					map: gMapa,
+					position: coordenadas,
+					title: 'Starbucks, hora de tomar um cafézinho'
+				}
+				var gMarkerDV = new google.maps.Marker(config);
+			}
 
 		}		
 	</script>
