@@ -9,7 +9,27 @@
 		<!-- Aqui vamos colocar nosso mapa -->
 	</div>
 	<script type="text/javascript">
-		
+		navigator.geolocation.getCurrentPosition(fn_ok, fn_error);
+		var divMapa = document.getElementById('mapa');
+
+		//Entrar nessa função quando não for permitido capturar a localização do usuário
+		function fn_error(){
+			divMapa.innerHTML = 'Não temos autorização para ver sua localização';
+		}
+
+		//Entrar nessa função quando for permitido pegar a localização do usuário
+		function fn_ok(resposta){
+			mostrar_objeto(resposta);
+			divMapa.innerHTML = 'Temos autorização para ver sua localização';
+		}
+
+		//mostrar_objeto(navigator.geolocation);
+
+		function mostrar_objeto(obj){
+			for( var prop in obj){
+				document.write(prop+': '+obj[prop] + '<br />');
+			}
+		}
 	</script>
 </body>
 </html>
